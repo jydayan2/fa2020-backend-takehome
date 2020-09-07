@@ -2,7 +2,15 @@ from flask import Flask, redirect
 
 import random
 
+import pandas
+
+import numpy
+
+import json
+
+
 app = Flask(__name__)
+
 
 """
 
@@ -17,6 +25,17 @@ Implement an endpoint `/api/fetch` that returns the contents of `data.csv` as JS
 """
 
 # your work here
+data = pandas.read_csv("data.csv")
+data_array = data.values
+labels = data.columns.array.to_numpy()
+employee = []
+for item in data_array:
+    employee.append({"Name": item[1] + " " + item[2], "Time Zone": item[3], "Department":item[4]})
+
+json_data = {"employees": employee}
+json_data = json.dumps(json_data)
+print(json_data)
+
 
 """
 
